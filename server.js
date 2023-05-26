@@ -23,7 +23,7 @@ app.prepare().then(() => {
         res.status(500).send("Error generating CSS");
       } else {
         console.log("CSS file generated successfully");
-        res.status(200).send(`http://localhost:3000/${botId}.css`);
+        res.status(200).send(`https://nextpress-css.vercel.app/${botId}.css`);
       }
     });
   });
