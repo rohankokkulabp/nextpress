@@ -14,8 +14,8 @@ const UploadCSS = ({ botId, color, botRadius, filename }) => {
           region: "nyc3",
           endpoint: "https://nyc3.digitaloceanspaces.com",
           credentials: {
-            accessKeyId: process.env.NEXT_PUBLIC_SPACES_ID,
-            secretAccessKey: process.env.NEXT_PUBLIC_SPACES_KEY,
+            accessKeyId:"DO00EQVFNDFJ74E9K6LT",
+            secretAccessKey: "W+w1EpMU33/fAEwWlb2R/gOHPhrnPOKNT4Y9MUPB7zY"
           },
         });
 
