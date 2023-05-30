@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { PopoverPicker } from "./components/styling/colorpicker/PopoverPicker";
+import SidePanel from "./components/styling/colorpicker/SidePanel";
 export default function Home() {
   const [color, setColor] = useState("#8d71bc");
   return (
     <div>
-      <PopoverPicker color={color} onChange={setColor} />
+      <SidePanel color={color} onChange={setColor} />
     </div>
   );
 }

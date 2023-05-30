@@ -1,6 +1,13 @@
 const polished = require("polished");
 
-const generateCssContent = (color, botRadius) => {
+const generateCssContent = (
+  color,
+  botRadius,
+  bottom,
+  right,
+  height,
+  width
+) => {
   const lightColor = polished.lighten(0.2, color); // Generate a lighter variant of the color
   const darkColor = polished.darken(0.2, color);
   const botbubbleColor = polished.lighten(0.25, color);
@@ -45,21 +52,18 @@ const generateCssContent = (color, botRadius) => {
         color: ${textColor}
       }
   
-      .bpw-layout {
-        width: 200px;
-        border: 1px;
-        border-radius: ${botRadius}px;
-      }
-  
       .bpw-header-name {
         color: ${textColor};
       }
   
       .bpw-layout {
-        height: 50%;
-        right: 30px;
-        bottom: 50px;
-      }
+      width: ${width}px !important;
+      border: 1px;
+      height: ${height}%;
+      border-radius: ${botRadius}px;
+      right: ${right}px; /* Added right property */
+      bottom: ${bottom}px; /* Added bottom property */
+    }
       .bpw-header-icon, .bpw-header-icon svg, .bpw-header-icon svg path{
         fill: ${textColor} !important;
       }

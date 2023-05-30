@@ -38,8 +38,8 @@ export const BotpressWebChat = React.memo(
     }, [botId, cssfilepath, isInitialized]);
 
     useEffect(() => {
-      if (window.botpressWebChat) {
-        console.log("uploading");
+        if (window.botpressWebChat) {
+          
         window.botpressWebChat.mergeConfig({ stylesheet: cssfilepath });
       }
     }, [cssContent, cssfilepath]);

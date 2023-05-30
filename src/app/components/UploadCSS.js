@@ -3,7 +3,7 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import generateCssContent from "./styling/generateCssContent";
 import { BotpressWebChat } from "./BotpressWebChat";
 
-const UploadCSS = ({ botId, color, botRadius, filename }) => {
+const UploadCSS = ({ botId, color, botRadius, bottom, right,height,width, filename }) => {
   const [generatedCSSPath, setGeneratedCSSPath] = useState("");
   const [showWebChat, setShowWebChat] = useState(false);
 
@@ -14,12 +14,12 @@ const UploadCSS = ({ botId, color, botRadius, filename }) => {
           region: "nyc3",
           endpoint: "https://nyc3.digitaloceanspaces.com",
           credentials: {
-            accessKeyId:"DO00EQVFNDFJ74E9K6LT",
-            secretAccessKey: "W+w1EpMU33/fAEwWlb2R/gOHPhrnPOKNT4Y9MUPB7zY"
+            accessKeyId: "DO00EQVFNDFJ74E9K6LT",
+            secretAccessKey: "W+w1EpMU33/fAEwWlb2R/gOHPhrnPOKNT4Y9MUPB7zY",
           },
         });
 
-        const cssContent = generateCssContent(color, botRadius);
+        const cssContent = generateCssContent(color, botRadius, bottom, right, height, width);
 
         const params = {
           Bucket: "webchat-styler-css",
@@ -36,7 +36,7 @@ const UploadCSS = ({ botId, color, botRadius, filename }) => {
         const filePath = `https://webchat-styler-css.nyc3.cdn.digitaloceanspaces.com/${botId}/${botId}_${filename}.css`;
         console.log(`CSS generation successful: ${filePath}`);
         setGeneratedCSSPath(filePath);
-        
+
         setShowWebChat(true);
       } catch (error) {
         console.log("Error generating CSS:", error);
@@ -44,7 +44,7 @@ const UploadCSS = ({ botId, color, botRadius, filename }) => {
     };
 
     handleGenerateCSS();
-  }, [botId, color, botRadius, filename]);
+  }, [botId, color, botRadius, bottom, right, height,width, filename]);
 
   return (
     <div>
@@ -55,7 +55,7 @@ const UploadCSS = ({ botId, color, botRadius, filename }) => {
         <BotpressWebChat
           botId={botId}
           cssfilepath={generatedCSSPath}
-          cssContent={generateCssContent(color, botRadius)}
+          cssContent={generateCssContent(color, botRadius,bottom, right, height, width )}
         />
       )}
     </div>

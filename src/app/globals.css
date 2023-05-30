@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 50px;
   font: normal 18px/1.4 Arial, sans-serif;
-  overflow: overlay;
+  overflow: hidden;
 }
 
 .picker {
