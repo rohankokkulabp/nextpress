@@ -8,9 +8,9 @@ import { BotpressWebChat } from "./BotpressWebChat";
 const ListBots = ({ botId, cssContent, filename }) => {
   const [generatedCSSPath, setGeneratedCSSPath] = useState("");
   const [showWebChat, setShowWebChat] = useState(false);
-  const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
-  const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
-  
+  const accessKeyId = process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID;
+  const secretAccessKey = process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY;
+
 
   useEffect(() => {
     const handleGenerateCSS = async () => {
