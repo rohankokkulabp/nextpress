@@ -1,20 +1,15 @@
 "use client";
-import Image from "next/image";
-import { FileUpload } from "primereact/fileupload";
-import "primeicons/primeicons.css";
-
-import { uploadObject } from "./upload";
+import React, { useState } from "react";
+import { PopoverPicker } from "./components/PopoverPicker";
 export default function Home() {
-  const handleUpload = async () => {
-    await uploadObject();
-  };
+  const [color, setColor] = useState("#8d71bc");
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <div className="card">
-          <button onClick={handleUpload}>Upload Object</button>
-        </div>
-      </div>
-    </main>
+    <div>
+       <PopoverPicker
+        color={color}
+        onChange={setColor}
+      />
+
+    </div>
   );
-}
+};
