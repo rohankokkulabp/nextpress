@@ -1,12 +1,102 @@
-.bpw-header-container {
-    background-color: #056bd0;
-}
-.rectangle2 {
-    background-color: #a3afbc;
-}
-.bpw-from-bot .bpw-chat-bubble {
-    background-color: #183858;
-}
-.chat-bubble2 {
-    background-color: #5d748a;
-}
+
+#input-message{
+    color: #ffffff
+  }
+      .bpw-header-container {
+        background-color: #900;
+      }
+  
+      .bpw-chat-bubble-content {
+        background-color: #8c00ff;
+        border-radius: 7px;
+        border: 1px transparent;
+      }
+  
+      .bpw-header-container {
+        border: 1px;
+        border-top-right-radius: 7px;
+        border-top-left-radius: 7px;
+      }
+      .bpw-date-container{
+        color: #ffffff
+      }
+  
+      .bpw-header-name {
+        color: #ffffff;
+      }
+  
+      .bpw-layout {
+      width: 360px !important;
+      border: 1px;
+      height: 50%;
+      border-radius: 7px;
+      right: 30px; /* Added right property */
+      bottom: 50px; /* Added bottom property */
+    }
+      .bpw-header-icon, .bpw-header-icon svg, .bpw-header-icon svg path{
+        fill: #ffffff !important;
+      }
+  
+      .bpw-header-container {
+        color: #ff0000;
+      }
+  
+      .bpw-keyboard-single-choice {
+        display: none;
+      }
+  
+      .bpw-chat-container {
+        background-color: #f66;
+        overflow: hidden;
+      }
+      .bpw-from-bot .bpw-chat-bubble .bpw-chat-bubble-content{
+        background-color: #ff8080;
+        color: #000000
+      }
+      .bpw-from-user .bpw-chat-bubble .bpw-chat-bubble-content{
+        background-color: #800000;
+        color: #ffffff
+      }
+  
+      .bpw-composer {
+        background-color: #f66;
+        border-bottom-right-radius: 7px;
+        border-bottom-left-radius: 7px;
+        border-top: none;
+      }
+  
+      /* Styling the scrollbar for WebKit-based browsers */
+      .bpw-chat-container::-webkit-scrollbar {
+        width: 10px;
+      }
+  
+      .bpw-chat-container::-webkit-scrollbar-track {
+        background: #900;
+      }
+  
+      .bpw-chat-container::-webkit-scrollbar-thumb {
+        background: #ff0000;
+      }
+      .bpw-bot-avatar img, .bpw-bot-avatar svg{
+        background: #900
+      }
+  
+      /* Styling the scrollbar for Firefox */
+      .bpw-chat-container {
+        scrollbar-width: thin;
+        scrollbar-color: #900 #f66;
+        border: none
+      }
+  
+      .bpw-chat-container::-moz-scrollbar {
+        width: 10px;
+      }
+  
+      .bpw-chat-container::-moz-scrollbar-track {
+        background: #f1f1f1;
+      }
+  
+      .bpw-chat-container::-moz-scrollbar-thumb {
+        background: #ff0000;
+      }
+    

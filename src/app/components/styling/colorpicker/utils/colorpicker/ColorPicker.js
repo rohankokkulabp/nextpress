@@ -4,22 +4,31 @@ import useClickOutside from "./useClickOutside";
 
 const ColorPicker = ({ color, onChange }) => {
   const popover = useRef();
-  const [isOpen, toggle] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [debouncedColor, setDebouncedColor] = useState(color);
 
   const close = useCallback(() => {
-    toggle(false);
-    console.log("Color picker closed");
+    setIsOpen(false);
+    //console.log("Color picker closed");
   }, []);
 
   const open = useCallback(() => {
-    toggle(true);
-    console.log("Color picker opened");
+    setIsOpen(true);
+    //console.log("Color picker opened");
   }, []);
 
   useClickOutside(popover, close);
 
+  const debouncedOnChange = useCallback(
+    debounce((newColor) => {
+      onChange(newColor); // Notify parent component about the color change
+    }, 300),
+    [onChange]
+  );
+
   const handleColorChange = (newColor) => {
-    onChange(newColor); // Notify parent component about the color change
+    setDebouncedColor(newColor);
+    debouncedOnChange(newColor);
   };
 
   return (
@@ -29,17 +38,20 @@ const ColorPicker = ({ color, onChange }) => {
           <div className="theme-selector">
             <div
               className="swatch"
-              style={{ backgroundColor: color }}
+              style={{ backgroundColor: debouncedColor }}
               onClick={open}
             />
             <HexColorInput
-              color={color}
+              color={debouncedColor}
               onChange={handleColorChange}
               className="color-input"
             />
             {isOpen && (
               <div className="popover" ref={popover}>
-                <HexColorPicker color={color} onChange={handleColorChange} />
+                <HexColorPicker
+                  color={debouncedColor}
+                  onChange={handleColorChange}
+                />
               </div>
             )}
           </div>
@@ -47,6 +59,17 @@ const ColorPicker = ({ color, onChange }) => {
       </div>
     </>
   );
+};
+
+// Debounce utility function
+const debounce = (fn, delay) => {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
 };
 
 export default ColorPicker;

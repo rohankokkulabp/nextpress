@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import ColorPicker from "./ColorPicker";
-import RangePicker from "./RangePicker";
-import UploadCSS from "../../UploadCSS";
-import generateCssContent from "../generateCssContent";
+import ColorPicker from "../styling/colorpicker/utils/colorpicker/ColorPicker";
+import RangePicker from "../styling/colorpicker/utils/rangepicker/RangePicker";
+import UploadCSS from "../upload-to-s3/UploadCSS";
+import generateCssContent from "../styling/generateCssContent";
 
-export const SidePanel = () => {
+const oldSidePanel = () => {
   const [color, setColor] = useState("#324d92"); // Initial color of the rectangle
   const [botId, setBotId] = useState("b419b124-7f17-41b4-ae05-526707a1b480");
   const [botRadius, setBotRadius] = useState(7);
   const [right, setRight] = useState(30); // Initial value for right property
   const [bottom, setBottom] = useState(50); // Initial value for bottom property
   const [height, setHeight] = useState(50); // Initial value for bottom property
-  const [width, setWeight] = useState(360); //px
+  const [width, setWidth] = useState(360); //px
   const generateUniqueNumber = () => {
     return Math.floor(Math.random() * 1000000); // Generate a random number
   };
@@ -46,8 +46,8 @@ export const SidePanel = () => {
     setFilename(generateUniqueNumber());
   };
 
-  const handleWeightChange = (newWeight) => {
-    setWeight(newWeight);
+  const handleWidthChange = (newWidth) => {
+    setWidth(newWidth);
     setFilename(generateUniqueNumber());
   };
 
@@ -55,6 +55,7 @@ export const SidePanel = () => {
     <div className="side-panel">
       <input
         type="text"
+        className="text-2xl"
         value={botId}
         onChange={handleBotIdChange}
         placeholder="Enter Bot ID"
@@ -98,19 +99,21 @@ export const SidePanel = () => {
         min="330"
         max="430"
         step="1"
-        onChange={handleWeightChange}
+        onChange={handleWidthChange}
       />
       <ColorPicker color={color} onChange={handleColorChange} />
       {botId && (
         <div className="generator">
           <UploadCSS
             botId={botId}
-            color={color}
-            botRadius={botRadius}
-            bottom={bottom}
-            right={right}
-            height={height}
-            width={width}
+            cssContent={generateCssContent(
+              color,
+              botRadius,
+              bottom,
+              right,
+              height,
+              width
+            )}
             filename={filename}
           />
         </div>
@@ -119,4 +122,4 @@ export const SidePanel = () => {
   );
 };
 
-export default SidePanel;
+export default oldSidePanel;

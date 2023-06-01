@@ -9,7 +9,7 @@ const saveCSS = (cssContent) => {
     if (err) {
       console.error("Error saving CSS file:", err);
     } else {
-      console.log("CSS file saved successfully!");
+      //console.log("CSS file saved successfully!");
     }
   });
 };

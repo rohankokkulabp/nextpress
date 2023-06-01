@@ -19,10 +19,10 @@ app.prepare().then(() => {
 
     fs.writeFile(filePath, cssContent, (err) => {
       if (err) {
-        console.log("Error writing CSS file:", err);
+        //console.log("Error writing CSS file:", err);
         res.status(500).send("Error generating CSS");
       } else {
-        console.log("CSS file generated successfully");
+        //console.log("CSS file generated successfully");
         res.status(200).send(`https://nextpress-css.vercel.app/${botId}.css`);
       }
     });
@@ -34,6 +34,6 @@ app.prepare().then(() => {
 
   server.listen(3000, (err) => {
     if (err) throw err;
-    console.log("> Ready on http://localhost:3000");
+    //console.log("> Ready on http://localhost:3000");
   });
 });

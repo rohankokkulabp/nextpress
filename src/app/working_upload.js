@@ -36,9 +36,9 @@ export default function Working() {
 
       try {
         const data = await client.send(command);
-        console.log(data);
+        //console.log(data);
       } catch (error) {
-        console.log("Error uploading object:", error);
+        //console.log("Error uploading object:", error);
       }
     };
 
