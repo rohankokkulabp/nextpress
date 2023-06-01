@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 
 export const BotpressWebChat = React.memo(
-  ({ botId, cssfilepath, cssContent }) => {
+  ({ botId, cssfilepath }) => {
     const [isInitialized, setIsInitialized] = useState(false);
 
     useEffect(() => {
@@ -22,10 +22,15 @@ export const BotpressWebChat = React.memo(
             stylesheet: cssfilepath,
           });
           window.botpressWebChat.onEvent(
-            function () {
-              window.botpressWebChat.sendEvent({ type: "show" });
+            function (event) {
+              if (event.type === "LIFECYCLE.LOADED") {
+                window.botpressWebChat.sendEvent({ type: "show" });
+              }else if (event.type === 'CONFIG.SET') {
+                // SET MERGE CONFIG COMPLETE
+                console.log('config completed!')
+              }
             },
-            ["LIFECYCLE.LOADED"]
+            [ "LIFECYCLE.LOADED", "CONFIG.SET"]
           );
           setIsInitialized(true);
         };
@@ -39,10 +44,10 @@ export const BotpressWebChat = React.memo(
 
     useEffect(() => {
         if (window.botpressWebChat) {
-          
+        // SET STATE TO LOADING MERGE CONFIG
         window.botpressWebChat.mergeConfig({ stylesheet: cssfilepath });
       }
-    }, [cssContent, cssfilepath]);
+    }, [cssfilepath]);
 
     return (
       <>
