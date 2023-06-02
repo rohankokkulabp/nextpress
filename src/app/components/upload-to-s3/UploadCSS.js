@@ -37,7 +37,6 @@ const BotpressWebChat = React.memo(({ botId, cssfilepath }) => {
   }, [botId, cssfilepath, isInitialized]);
 
   useEffect(() => {
-    console.log(cssfilepath);
     if (isInitialized && window.botpressWebChat) {
       window.botpressWebChat.mergeConfig({
         stylesheet: cssfilepath,
@@ -67,9 +66,11 @@ const UploadCSS = ({ botId, cssContent }) => {
           },
         });
 
+        const fileName = `${botId}/style.css`
+
         const params = {
           Bucket: "webchat-styler-css",
-          Key: `${botId}/${botId}_${filename}.css`,
+          Key: fileName,
           Body: cssContent,
           ContentType: "text/css",
           ACL: "public-read-write",
@@ -78,8 +79,7 @@ const UploadCSS = ({ botId, cssContent }) => {
         const command = new PutObjectCommand(params);
 
         const data = await client.send(command);
-        console.log(data);
-        const filePath = `https://webchat-styler-css.nyc3.cdn.digitaloceanspaces.com/${botId}/${botId}_${filename}.css`;
+        const filePath = `https://webchat-styler-css.nyc3.cdn.digitaloceanspaces.com/${fileName}?time=${Date.now()}`;
         setGeneratedCSSPath(filePath);
 
         setShowWebChat(true);
@@ -91,7 +91,7 @@ const UploadCSS = ({ botId, cssContent }) => {
   );
 
   useEffect(() => {
-    debouncedGenerateCSS(botId, cssContent);
+    debounceGeneratedCSS(botId, cssContent);
   }, [botId, cssContent]);
 
   return (
