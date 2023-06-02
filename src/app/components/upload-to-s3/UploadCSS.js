@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import { debounce } from "lodash";
-
+import { throttle } from "lodash";
 const BotpressWebChat = React.memo(({ botId, cssfilepath }) => {
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -50,14 +49,14 @@ const BotpressWebChat = React.memo(({ botId, cssfilepath }) => {
   return <>{isInitialized && <div id="botpress-webchat-container"></div>}</>;
 });
 
-const UploadCSS = ({ botId, cssContent, filename }) => {
+const UploadCSS = ({ botId, cssContent }) => {
   const [generatedCSSPath, setGeneratedCSSPath] = useState(
-    "https://webchat-styler-css.nyc3.cdn.digitaloceanspaces.com/b419b124-7f17-41b4-ae05-526707a1b480/b419b124-7f17-41b4-ae05-526707a1b480_34899.css"
+    `https://webchat-styler-css.nyc3.cdn.digitaloceanspaces.com/${botId}/style.css`
   );
   const [showWebChat, setShowWebChat] = useState(false);
 
-  useEffect(() => {
-    const handleGenerateCSS = async () => {
+  const debounceGeneratedCSS = useCallback(
+    throttle(async (botId, cssContent) => {
       try {
         const client = new S3Client({
           region: "nyc3",
@@ -85,18 +84,15 @@ const UploadCSS = ({ botId, cssContent, filename }) => {
 
         setShowWebChat(true);
       } catch (error) {
-        //console.log("Error generating CSS:", error);
+        // console.log("Error generating CSS:", error);
       }
-    };
+    }, 500),
+    []
+  );
 
-    const debouncedGenerateCSS = debounce(handleGenerateCSS, 100); // Debounce for 300ms
-
-    debouncedGenerateCSS();
-
-    return () => {
-      debouncedGenerateCSS.cancel(); // Cleanup debounce on component unmount
-    };
-  }, [botId, cssContent, filename]);
+  useEffect(() => {
+    debouncedGenerateCSS(botId, cssContent);
+  }, [botId, cssContent]);
 
   return (
     <div>
