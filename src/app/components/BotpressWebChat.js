@@ -18,7 +18,7 @@ export const BotpressWebChat = React.memo(
             messagingUrl: "https://messaging.botpress.cloud",
             clientId: botId,
             disableAnimations: true,
-            botName: "Works",
+            botName: "My Chatbot",
             stylesheet: cssfilepath,
           });
           window.botpressWebChat.onEvent(

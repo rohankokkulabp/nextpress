@@ -29,7 +29,7 @@ const UploadCSS = ({ botId, color, botRadius, bottom, right,height,width, filena
 
         const cssContent = generateCssContent(color, botRadius, bottom, right, height, width);
 
-        const fileName = 'jesse_test.css'
+        const fileName = `${botId}/style.css`
 
         const params = {
           Bucket: "webchat-styler-css",
